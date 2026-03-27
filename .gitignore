@@ -6,3 +6,4 @@
 *.pem
 *.key
 *.tfvars
+.claude/settings.json
