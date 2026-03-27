@@ -1,10 +1,6 @@
-# ==========================================
-# WEB TIER SECURITY GROUP
-# Allows: HTTP (80), HTTPS (443), SSH (22)
-# ==========================================
 resource "aws_security_group" "web_sg_jukpabi" {
   name        = "web-sg-jukpabi"
-  description = "Web tier — allow HTTP HTTPS and SSH from internet"
+  description = "Web tier - allow HTTP HTTPS and SSH from internet"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -42,13 +38,9 @@ resource "aws_security_group" "web_sg_jukpabi" {
   tags = { Name = "web-sg-jukpabi" }
 }
 
-# ==========================================
-# APP TIER SECURITY GROUP
-# Allows: port 3001 and SSH from Web SG only
-# ==========================================
 resource "aws_security_group" "app_sg_jukpabi" {
   name        = "app-sg-jukpabi"
-  description = "App tier — allow port 3001 and SSH from Web SG only"
+  description = "App tier - allow port 3001 and SSH from Web SG only"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -78,13 +70,9 @@ resource "aws_security_group" "app_sg_jukpabi" {
   tags = { Name = "app-sg-jukpabi" }
 }
 
-# ==========================================
-# DB TIER SECURITY GROUP
-# Allows: MySQL (3306) from App SG only
-# ==========================================
 resource "aws_security_group" "db_sg_jukpabi" {
   name        = "db-sg-jukpabi"
-  description = "DB tier — allow MySQL from App SG only"
+  description = "DB tier - allow MySQL from App SG only"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -106,13 +94,9 @@ resource "aws_security_group" "db_sg_jukpabi" {
   tags = { Name = "db-sg-jukpabi" }
 }
 
-# ==========================================
-# ALB SECURITY GROUP
-# Allows: HTTP (80) from internet
-# ==========================================
 resource "aws_security_group" "alb_sg_jukpabi" {
   name        = "alb-sg-jukpabi"
-  description = "ALB — allow HTTP from internet"
+  description = "ALB - allow HTTP from internet"
   vpc_id      = var.vpc_id
 
   ingress {

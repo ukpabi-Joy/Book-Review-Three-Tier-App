@@ -72,7 +72,7 @@ resource "aws_lb_listener" "public_alb_listener_jukpabi" {
 
 # --- Internal ALB ---
 resource "aws_lb" "internal_alb_jukpabi" {
-  name               = "internal-alb-jukpabi"
+  name               = "app-alb-jukpabi"
   internal           = true
   load_balancer_type = "application"
   security_groups    = [var.app_sg_id]

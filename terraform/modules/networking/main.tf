@@ -94,9 +94,31 @@ resource "aws_route_table_association" "web_rt_assoc_2_jukpabi" {
   route_table_id = aws_route_table.public_rt_jukpabi.id
 }
 
+# --- Elastic IP for NAT Gateway ---
+resource "aws_eip" "nat_eip_jukpabi" {
+  domain = "vpc"
+
+  tags = { Name = "nat-eip-jukpabi" }
+}
+
+# --- NAT Gateway (in public web-subnet-1) ---
+resource "aws_nat_gateway" "nat_gw_jukpabi" {
+  allocation_id = aws_eip.nat_eip_jukpabi.id
+  subnet_id     = aws_subnet.web_subnet_1_jukpabi.id
+
+  tags = { Name = "nat-gw-jukpabi" }
+
+  depends_on = [aws_internet_gateway.igw_jukpabi]
+}
+
 # --- Private Route Table ---
 resource "aws_route_table" "private_rt_jukpabi" {
   vpc_id = aws_vpc.vpc_jukpabi.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat_gw_jukpabi.id
+  }
 
   tags = { Name = "private-rt-jukpabi" }
 }

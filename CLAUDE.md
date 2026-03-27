@@ -12,6 +12,25 @@ conventions, never skip validation steps, and always prioritize security.
 - IaC: Terraform with modules
 - Account ID: 234026641771
 
+## Live Infrastructure
+| Resource | Details |
+|----------|---------|
+| Web EC2 #1 | Public IP: 18.215.161.201 — Nginx reverse proxy |
+| Web EC2 #2 | Public IP: 98.85.222.24 — Nginx reverse proxy |
+| App EC2 #1 | Private IP: 10.0.3.24 — Node.js/PM2 (AZ: us-east-1a) |
+| App EC2 #2 | Private IP: 10.0.4.25 — Node.js/PM2 (AZ: us-east-1b) |
+| RDS MySQL | rds-jukpabi.cwj4cyce40qi.us-east-1.rds.amazonaws.com |
+| SSH Key | /home/joy-ukpabi/.ssh/book-review-key |
+| SSH User | ec2-user |
+
+## Deployment Notes
+- Web tier runs Nginx as a reverse proxy forwarding to App tier on port 3001
+- App tier runs Node.js managed by PM2 (process manager)
+- SSH into App EC2s must be done via bastion jump through a Web EC2
+- After any code deployment: restart PM2 on app EC2s, reload Nginx on web EC2s
+- Use scripts/post-deploy.sh for automated post-deploy service restarts
+- Use scripts/health-check.sh for ALB and EC2 health verification
+
 ## Application Description
 A full-stack Book Review application where users can:
 - Browse and search books
@@ -88,6 +107,8 @@ terraform/
 | Compute | .claude/subagents/compute_agent.md | Web and App EC2 instances |
 | Database | .claude/subagents/database_agent.md | RDS MySQL Multi-AZ |
 | Load Balancer | .claude/subagents/lb_agent.md | Public ALB and Internal ALB |
+| Deploy | .claude/subagents/deploy_agent.md | SSH deploy to EC2s, PM2 restart, Nginx reload |
+| Health Check | .claude/subagents/healthcheck_agent.md | ALB target health, EC2 status, endpoint checks |
 
 ## Task Execution Order
 1. networking — must complete first
