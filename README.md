@@ -153,6 +153,17 @@ Book-Review-Three-Tier-App/
 
 ---
 
+
+## Naming Convention
+All AWS resources in this project use a personal suffix appended to resource names (e.g. `vpc-jukpabi`, `web-sg-jukpabi`). This was used to avoid naming conflicts in a shared AWS environment.
+
+If you are deploying this project yourself, replace `-jukpabi` with your own identifier or remove it entirely. You can find all naming references in:
+- `CLAUDE.md` — naming convention rules
+- `terraform/modules/*/main.tf` — resource name tags
+- `.claude/subagents/deploy_agent.md` — deployment references
+
+---
+
 ## Deployment Guide
 
 ### Step 1 — Clone the Repository
