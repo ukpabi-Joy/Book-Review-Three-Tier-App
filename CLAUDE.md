@@ -10,18 +10,20 @@ conventions, never skip validation steps, and always prioritize security.
 - Cloud: Amazon Web Services
 - Region: us-east-1
 - IaC: Terraform with modules
-- Account ID: 234026641771
+- Account ID: <AWS_ACCOUNT_ID>
 
-## Live Infrastructure
+## Infrastructure Reference
+> These values are populated after `terraform apply`. Replace placeholders with actual outputs.
+
 | Resource | Details |
 |----------|---------|
-| Web EC2 #1 | Public IP: 18.215.161.201 — Nginx reverse proxy |
-| Web EC2 #2 | Public IP: 98.85.222.24 — Nginx reverse proxy |
-| App EC2 #1 | Private IP: 10.0.3.24 — Node.js/PM2 (AZ: us-east-1a) |
-| App EC2 #2 | Private IP: 10.0.4.25 — Node.js/PM2 (AZ: us-east-1b) |
-| RDS MySQL | rds-jukpabi.cwj4cyce40qi.us-east-1.rds.amazonaws.com |
-| SSH Key | /home/joy-ukpabi/.ssh/book-review-key |
-| SSH User | ec2-user |
+| Web EC2 #1 | Public IP: `<WEB_EC2_1_IP>` — Nginx reverse proxy |
+| Web EC2 #2 | Public IP: `<WEB_EC2_2_IP>` — Nginx reverse proxy |
+| App EC2 #1 | Private IP: `<APP_EC2_1_IP>` — Node.js/PM2 (AZ: us-east-1a) |
+| App EC2 #2 | Private IP: `<APP_EC2_2_IP>` — Node.js/PM2 (AZ: us-east-1b) |
+| RDS MySQL | `<RDS_ENDPOINT>` |
+| SSH Key | `<SSH_KEY_PATH>` |
+| SSH User | `<SSH_USER>` |
 
 ## Deployment Notes
 - Web tier runs Nginx as a reverse proxy forwarding to App tier on port 3001
